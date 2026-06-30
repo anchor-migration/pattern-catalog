@@ -1,0 +1,25 @@
+id: cmp-scalar-entity-to-jpa-tx-bean
+title: CMP scalar entity to JPA (TxBean)
+description: "ADR-007 v0.4c — TxBean scalar fields on TX table"
+linked_recipes:
+  - CmpScalarEntityToJpa
+detection:
+  ast_signals:
+    - "@javax.persistence.Entity on TxBean"
+  schema_signals:
+    - TX table
+verification:
+  scope_prefix: com.sun.ebank.ejb.tx.TxBean
+  checks:
+    - id: module_quiescent
+      kind: structural
+      rule: no_drift_outside
+      scope_prefix: com.sun.ebank.ejb.tx.TxBean
+    - id: jpa_fields_added
+      kind: structural
+      rule: added_fields_count
+      scope_prefix: com.sun.ebank.ejb.tx.TxBean
+      count: 5
+    - id: crosswalk_clean
+      kind: crosswalk
+      rule: zero_crosswalk_errors

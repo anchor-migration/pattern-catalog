@@ -1,0 +1,25 @@
+id: cmp-scalar-entity-to-jpa-customer-bean
+title: CMP scalar entity to JPA (CustomerBean)
+description: "ADR-007 v0.4c — CustomerBean scalar fields on CUSTOMER table"
+linked_recipes:
+  - CmpScalarEntityToJpa
+detection:
+  ast_signals:
+    - "@javax.persistence.Entity on CustomerBean"
+  schema_signals:
+    - CUSTOMER table
+verification:
+  scope_prefix: com.sun.ebank.ejb.customer.CustomerBean
+  checks:
+    - id: module_quiescent
+      kind: structural
+      rule: no_drift_outside
+      scope_prefix: com.sun.ebank.ejb.customer.CustomerBean
+    - id: jpa_fields_added
+      kind: structural
+      rule: added_fields_count
+      scope_prefix: com.sun.ebank.ejb.customer.CustomerBean
+      count: 10
+    - id: crosswalk_clean
+      kind: crosswalk
+      rule: zero_crosswalk_errors
