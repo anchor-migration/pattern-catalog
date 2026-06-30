@@ -1,0 +1,24 @@
+id: cmp-foreign-key-to-jpa-tx-bean
+title: CMP ForeignKey to JPA (TxBean account)
+description: "ADR-007 v0.4b — add @ManyToOne account FK on migrated TxBean"
+linked_recipes:
+  - CmpForeignKeyToJpa
+detection:
+  ast_signals:
+    - "@javax.persistence.Entity on TxBean"
+  schema_signals:
+    - TX.account_id FK to ACCOUNT
+verification:
+  scope_prefix: com.sun.ebank.ejb.tx.TxBean
+  checks:
+    - id: many_to_one_field_added
+      kind: structural
+      rule: added_fields_count
+      scope_prefix: com.sun.ebank.ejb.tx.TxBean
+      count: 1
+    - id: touchpoint_many_to_one
+      kind: behavioral
+      rule: source_contains
+      patterns:
+        - "@javax.persistence.ManyToOne"
+        - "account_id"

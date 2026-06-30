@@ -10,6 +10,7 @@ Part of **[Anchor Migration](https://github.com/anchor-migration/migration-hub)*
 patterns/
   cmp-scalar-entity-to-jpa-account-bean.yaml
   cmp-many-to-many-to-jpa-account-bean.yaml
+  cmp-foreign-key-to-jpa-tx-bean.yaml
 ```
 
 Each pattern YAML includes:
