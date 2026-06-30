@@ -1,0 +1,24 @@
+id: cmp-many-to-many-to-jpa-account-bean
+title: CMP ManyToMany to JPA (AccountBean customers)
+description: "ADR-007 v0.4a — add @ManyToMany customers collection on migrated AccountBean"
+linked_recipes:
+  - CmpManyToManyToJpa
+detection:
+  ast_signals:
+    - "@javax.persistence.Entity on AccountBean"
+  schema_signals:
+    - CUSTOMER_ACCOUNT_XREF join table
+verification:
+  scope_prefix: com.sun.ebank.ejb.account.AccountBean
+  checks:
+    - id: many_to_many_field_added
+      kind: structural
+      rule: added_fields_count
+      scope_prefix: com.sun.ebank.ejb.account.AccountBean
+      count: 1
+    - id: touchpoint_many_to_many
+      kind: behavioral
+      rule: source_contains
+      patterns:
+        - "@javax.persistence.ManyToMany"
+        - "CUSTOMER_ACCOUNT_XREF"
