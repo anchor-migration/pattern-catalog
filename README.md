@@ -13,6 +13,7 @@ patterns/
   cmp-scalar-entity-to-jpa-tx-bean.yaml
   cmp-many-to-many-to-jpa-account-bean.yaml
   cmp-foreign-key-to-jpa-tx-bean.yaml
+  cmp-next-id-table-to-jpa-next-id-bean.yaml
 ```
 
 Each pattern YAML includes:

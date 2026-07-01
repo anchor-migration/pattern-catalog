@@ -1,0 +1,21 @@
+id: cmp-next-id-table-to-jpa-next-id-bean
+title: NextId table to JPA (NextIdBean)
+description: "ADR-007 v0.4d — NEXT_ID table counter entity with retained getNextId()"
+linked_recipes:
+  - NextIdTableToJpa
+detection:
+  ast_signals:
+    - "@javax.persistence.Entity on NextIdBean"
+  schema_signals:
+    - NEXT_ID table
+verification:
+  scope_prefix: com.sun.ebank.ejb.util.NextIdBean
+  checks:
+    - id: jpa_fields_added
+      kind: structural
+      rule: added_fields_count
+      scope_prefix: com.sun.ebank.ejb.util.NextIdBean
+      count: 2
+    - id: crosswalk_clean
+      kind: crosswalk
+      rule: zero_crosswalk_errors
