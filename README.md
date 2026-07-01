@@ -46,6 +46,19 @@ checks: []   # optional overrides merged by check id
 
 Bundled patterns also ship inside `parity-verify` JAR under `src/main/resources/patterns/` for `--matrix dukesbank-cmp-jpa` without an external catalog path.
 
+## Multi-entity E2E (Duke's Bank v0.4)
+
+When several entities migrate in one pipeline, use **per-entity** matrix files without `pattern_id` (avoids `module_quiescent` false failures when other entities also change):
+
+| Matrix file | Entity |
+|-------------|--------|
+| `parity-verify/examples/matrices/dukesbank-cmp-jpa-multi-account.yaml` | `AccountBean` |
+| `parity-verify/examples/matrices/dukesbank-cmp-jpa-multi-customer.yaml` | `CustomerBean` |
+| `parity-verify/examples/matrices/dukesbank-cmp-jpa-multi-tx.yaml` | `TxBean` |
+| `parity-verify/examples/matrices/dukesbank-cmp-jpa-multi-nextid.yaml` | `NextIdBean` |
+
+Orchestrated by `demo-dukesbank/scripts/run-e2e-jpa-parity.ps1`.
+
 ## License
 
 MIT
